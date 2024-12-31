@@ -47,12 +47,26 @@ class library_user:
     def __init__(self, user_id, user_name):
         self.user_id = user_id
         self.user_name = user_name
+        
+class Librarian(library_user):
+    def __init__(self,user_id,user_name,password):
+        super().__init__(user_id,user_name)
+        self.password = password
+        
+    def check_registry(self, password, Library):
+        if password == self.password:
+            print('Hello Librarian! Here is the registry')
+            print(Library.books_available)
+        else:
+            print('Password is incorrect')
+        
 
 book1 = Book('Silence of the Lambs', 'Some Guy')
 book2 = Book('Red Rising', 'Another Guy')
 user1 = library_user('user1', 'Tommi')
 user2 = library_user('user2', 'Leanna')
 user3 = library_user('user3', 'Boobi')
+librarian = Librarian('superuser', 'baddass', 'L' )
 
 def main():
     books_available = [book1, book2]
@@ -64,6 +78,7 @@ def main():
         print('Welcome to Thomas Brown Library. Please select an operation')  
         print('Option 1: Check out a book')
         print('Option 2: Exit')
+        print('Option 3: Librarian Log In')
         choice = input('Enter an option:')
         choice = int(choice)
         
@@ -77,6 +92,9 @@ def main():
         elif choice == 2:
             print('Goodbye')
             break
+        elif choice == 3:
+            password = input('Please enter your password')
+            librarian.check_registry(password, TB_Library)
         else:
             print('No valid input')
 
